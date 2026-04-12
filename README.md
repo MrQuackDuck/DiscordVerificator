@@ -59,6 +59,9 @@ To join the server, the player should run the seen command to the **Discord bot*
 # 5. Give your players access to send a command to the bot (e.g., invite it to your Discord server)
 token: "DISCORD_BOT_TOKEN"
 
+# Delay that a player must wait until getting a new verification code (in seconds)
+codeDelay: 10
+
 messages:
   "not-enough-permissions": "&cNot enough permissions!"
   "invalid-link-format": "&cInvalid format! Please use: /link <player> <discordId>"
