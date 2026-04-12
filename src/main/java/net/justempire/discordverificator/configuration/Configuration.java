@@ -10,4 +10,8 @@ public class Configuration extends MessageConfigurationBase {
     public String token() {
         return getString("token");
     }
+
+    public long codeDelay() {
+        return getLong("codeDelay");
+    }
 }

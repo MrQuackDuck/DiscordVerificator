@@ -50,15 +50,15 @@ public class JoinListener implements Listener {
             return;
         }
 
-        // Ensure that no more than 30 seconds have passed since this player last joined
+        // Ensure that no more than the configured amount of seconds has passed since this player last joined
         if (!user.getCurrentAllowedIp().equals(ipAddress)) {
             Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
             Date latestVerificationSent;
             try {
                 latestVerificationSent = user.getLastTimeUserReceivedCode(ipAddress);
                 long differenceInSeconds = getDifferenceInSeconds(latestVerificationSent, now);
-                if (differenceInSeconds < 30) {
-                    preventJoin(event, String.format(config.getMessage("wait-until-verification"), 30 - differenceInSeconds));
+                if (differenceInSeconds < config.codeDelay()) {
+                    preventJoin(event, String.format(config.getMessage("wait-until-verification"), config.codeDelay() - differenceInSeconds));
                     return;
                 }
             }
