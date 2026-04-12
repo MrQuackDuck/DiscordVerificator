@@ -124,6 +124,9 @@ public class UserManager {
 
             // Trying to load users from JSON
             loadUsers();
+
+            // Deleting unnecessary records to reduce the JSON size
+            optimizeJson();
         }
         catch (MismatchedInputException e) {
             userList = new ArrayList<>();
@@ -139,6 +142,15 @@ public class UserManager {
     }
 
     public void onShutDown() {
+        saveUsers();
+    }
+
+    // Removes old unnecessary records to reduce the size of JSON
+    private void optimizeJson() {
+        for (User user : userList) {
+            user.clearVerificationHistory();
+        }
+
         saveUsers();
     }
 }

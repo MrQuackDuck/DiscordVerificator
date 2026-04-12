@@ -58,6 +58,11 @@ public class User {
         latestVerificationsFromIps.add(verificationFromIp);
     }
 
+    // Method for clearing all records related to joining the server
+    public void clearVerificationHistory() {
+        latestVerificationsFromIps = new ArrayList<>();
+    }
+
     // Method for getting the last time the user got a verification code from a certain IP
     // Used to be compared in order to create a delay between generating verification codes
     public Date getLastTimeUserReceivedCode(String ip) throws NoCodesFoundException {
