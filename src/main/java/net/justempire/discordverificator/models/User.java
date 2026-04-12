@@ -41,7 +41,7 @@ public class User {
         this.currentAllowedIp = currentAllowedIp;
     }
 
-    // Method for updating last time user got a code from certain IP
+    // Method for updating (adding) the last time user got a code from a certain IP
     public void updateLastTimeUserReceivedCode(String ip) {
         if (latestVerificationsFromIps == null) latestVerificationsFromIps = new ArrayList<>();
 
@@ -53,12 +53,12 @@ public class User {
             return;
         }
 
-        // If not found, then create
+        // If not found for specified 'ip' - add new record
         LastTimeUserReceivedCode verificationFromIp = new LastTimeUserReceivedCode(ip, now);
         latestVerificationsFromIps.add(verificationFromIp);
     }
 
-    // Method for getting last time user got a code from certain IP
+    // Method for getting the last time the user got a verification code from a certain IP
     // Used to be compared in order to create a delay between generating verification codes
     public Date getLastTimeUserReceivedCode(String ip) throws NoCodesFoundException {
         for (LastTimeUserReceivedCode verification : latestVerificationsFromIps) {
@@ -66,7 +66,6 @@ public class User {
                 return verification.getTimeOfReceiving();
         }
 
-        // Throwing exception if nothing found
         throw new NoCodesFoundException();
     }
 
@@ -105,6 +104,7 @@ public class User {
                 return;
             }
         }
+
         throw new NotFoundException();
     }
 }
