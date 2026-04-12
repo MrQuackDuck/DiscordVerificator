@@ -25,11 +25,6 @@ public class UserManager {
         setUp(pathToJson);
     }
 
-    private void addUser(User userToAdd) {
-        userList.add(userToAdd);
-        saveUsers();
-    }
-
     public User getByDiscordId(String discordId) throws UserNotFoundException {
         for (User user : userList) {
             // Return the user if found
@@ -84,6 +79,11 @@ public class UserManager {
         // If user wasn't found, create one
         User user = new User(discordId, Arrays.asList(minecraftUsername), new ArrayList<>(), "");
         addUser(user);
+    }
+
+    private void addUser(User userToAdd) {
+        userList.add(userToAdd);
+        saveUsers();
     }
 
     public void unlinkUser(String minecraftUsername) throws NotFoundException {
